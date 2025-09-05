@@ -1,0 +1,107 @@
+1. What is the difference between JDK, JRE, and JVM?
+    JDK is Java Development Kit it is used for Developing Java Application
+    JRE is Java Runtime Environment that is used for running java programs/application
+    JVM is Java Virtual Machine that provides a Platform Independent execution environment for running your code.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ 2. What are the different types of constructors in Java? And How to overload Constructor?
+    Constructor is a block of code, which will have a name as the Class name.
+    The constructor will be executed when a new instance of the class is created.
+    There are two types of Constructor
+
+    A>Default Constructor
+    Default constructor will not have any parameter, If you don’t define it then compiles creates one automatically.
+    Default constructor will be called by compiler if there is no other constructor.
+    Example Code Snippet:
+        class Academy {
+            // Constructor
+            Academy() {
+              System.out.println("Constructor called");
+            }
+        }
+        public class SampleClass {
+            public static void main(String args[]) {
+                // this invokes default constructor.
+              Academy academy = new Academy();
+            }
+        }
+        Output: Constructor called
+
+        B>Parameterized Constructor
+        The parameterized constructor will have parameters, this is mainly used for initialization purposes.
+        You can pass different values to a parameterized constructor at the time of object creation,
+        but values should match the constructor signature
+        Example Code Snippet:
+            class Academy {
+                int a=0; int b=0;
+                // Parameterized Constructor
+                Academy(int a, int b) {
+                      System.out.println("Constructor called");
+                      System.out.println("Addition of "+a+" and "+b+" = "+(a+b));
+                }
+            }
+            public class SampleClass {
+                      public static void main(String args[]) {
+                                  // this invokes default constructor.
+                            Academy academy = new Academy(10,20);
+                      }
+            }
+            Output:
+            Constructor called
+            Addition of 10 and 20 = 30
+------------------------------------------------------------------------------------------------------------------------
+3. What is the static keyword? How it can be used?
+    The static indicates that the particular member belongs to a type itself, rather than to an instance of that type.
+    That means a static member of the class can be accessed before creating any object for that class.
+------------------------------------------------------------------------------------------------------------------------
+
+4. Can you explain the difference between Abstract Class and Interface? When would you use one over the other?
+    An abstract class in Java can have both abstract (unimplemented) and concrete (implemented) methods,
+    whereas an interface prior to Java 8 only had abstract methods, but from Java 8 onwards, it can also have
+    default and static methods, and from Java 9, even private methods.
+
+    Abstract class is used when we want to share common state/behavior across subclasses, since it can hold instance
+    variables, constructors, and method implementations.
+
+    Interface is used to represent a contract or capability, supporting multiple inheritance.
+    Example: In an automation framework, an abstract class like BaseTest can hold common setup/teardown methods,
+    while interfaces like BrowserActions define browser behavior.
+    👉 Use abstract class when classes are closely related and share logic. Use interface when you just want to
+     enforce a contract without dictating implementation.
+------------------------------------------------------------------------------------------------------------------------
+
+5. What is Polymorphism in Java? Can you explain both compile-time and runtime polymorphism with examples?
+    Polymorphism means one entity having many forms.
+
+    Compile-time (Overloading): Same method name, different parameter list.
+    Example: click(String locator) and click(By locator).
+
+    Runtime (Overriding): A child class provides a specific implementation of a parent class method.
+    Example: WebDriver driver = new ChromeDriver(); –
+    here Selenium uses runtime polymorphism to decide which browser driver’s methods to execute.
+    In automation, this allows writing generic methods that work with multiple drivers.
+------------------------------------------------------------------------------------------------------------------------
+
+6. How does encapsulation help in test automation frameworks?
+    Encapsulation means binding data (variables) and methods together, restricting direct access using private
+    fields + getters/setters.
+    It improves security, maintainability, and reusability.
+    In automation frameworks, encapsulation is heavily used in Page Object Model (POM) where web elements are private,
+    and actions are exposed via public methods, ensuring test scripts don’t directly interact with raw locators.
+------------------------------------------------------------------------------------------------------------------------
+
+7.  Can you explain the difference between method overloading and method overriding?
+    Overloading: Same method name but different parameters, resolved at compile time.
+    Overriding: Subclass modifies parent method, resolved at runtime.
+    Automation Example: A Logger class may overload log(String msg) and log(String msg, Exception e).
+    Overriding helps in customizing behavior in child classes, like extending WebDriverWait with custom conditions.
+------------------------------------------------------------------------------------------------------------------------
+
+8. What happens if we define a constructor as private? Where is it useful?
+    A private constructor restricts instantiation of a class from outside. It’s used in Singleton Design Pattern,
+    where only one instance of a class should exist.
+    In automation, this is useful for classes like DriverManager, ensuring only one WebDriver instance is active
+    per test thread.
+------------------------------------------------------------------------------------------------------------------------
+
+
