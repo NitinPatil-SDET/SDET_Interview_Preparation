@@ -103,5 +103,39 @@
     In automation, this is useful for classes like DriverManager, ensuring only one WebDriver instance is active
     per test thread.
 ------------------------------------------------------------------------------------------------------------------------
+9. Explain the difference between public, private, protected, and default access modifiers.
+    In Java, access modifiers control the visibility of classes, methods, and variables.
+    👉 public → Accessible from anywhere in the project.
+    Example: Utility classes like DriverFactory often expose public methods (getDriver()).
+    👉 private → Accessible only within the same class.
+    Example: In Page Object Model (POM), web elements are private so they cannot be directly manipulated by test classes.
+    👉 protected → Accessible within the same package and by subclasses (even if they’re in different packages).
+    Example: A BaseTest class can expose protected setup methods to child test classes.
+    👉 default (package-private) → When no modifier is specified, the member is accessible only within the same package.
+    This is useful for restricting access without making things public.
+    👉 In Automation Frameworks – Proper use of modifiers ensures data hiding, reusability, and maintainability.
+    For example, locators are private, page methods are public, and shared utilities can be protected.
+    This enforces good design and reduces accidental misuse of code.
+------------------------------------------------------------------------------------------------------------------------
 
+10. How does encapsulation improve maintainability in Page Object Model (POM)?
+    Encapsulation is the principle of hiding implementation details and exposing only what’s necessary through public
+    methods. In POM:
+    Locators (like By username = …) are private, preventing test classes from directly accessing raw locators.
+    Page actions (like login(String user, String pass)) are public, exposing only necessary behavior.
+    Benefits:
+    Flexibility: If a locator changes, only the Page Object class needs updating, not all test cases.
+    Maintainability: Reduces duplicate code.
+    Readability: Test cases look cleaner (loginPage.login(“user”, “pass”)).
+    Scalability: Easier to extend with additional pages/actions.
+------------------------------------------------------------------------------------------------------------------------
 
+11. Can we achieve encapsulation without using getters and setters?
+    Yes, but with limitations. Encapsulation means restricting direct access to fields, and getters/setters are the
+    standard approach. However, alternatives include:
+    Business methods: Instead of exposing a getter, we can provide a method that performs an action internally.
+    For example, instead of getPassword(), we might have authenticateUser() that uses the password internally.
+    Constructors or Builder Pattern: Used to initialize immutable objects where direct field access isn’t needed.
+    👉 In test frameworks, sometimes you avoid getters/setters if exposing a field violates security or abstraction.
+    For example, we never want to expose raw WebElements; instead, we provide public actions (clickLoginButton()),
+    keeping the element private.
