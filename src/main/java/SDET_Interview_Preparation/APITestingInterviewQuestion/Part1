@@ -1,0 +1,123 @@
+1.  What is an API?
+--> API stands for Application Programming Interface.
+    Think of it as a messenger that allows two software systems to talk to each other.
+    Example in daily life:
+    When you order food on Swiggy/Zomato, the app doesn’t cook food. It just sends your request to the
+    restaurant’s system via APIs, and the restaurant’s system sends back details like menu items, prices,
+    and delivery time.
+    An API defines a set of rules (endpoints, methods, input, and output) that one software must follow
+    to interact with another.
+    These rules are usually shared in the form of documentation (like “if you call this URL with these
+    parameters, you’ll get this response”).
+-----------------------------------------------------------------------------------------------------------
+
+2.  Definition of API Testing
+--> API Testing is the process of testing APIs directly to verify:
+    They work correctly (functional testing).
+    They handle invalid inputs gracefully.
+    They perform well under load.
+    They are secure against unauthorized access.
+    👉 Unlike UI testing (clicking buttons), API testing focuses on the backend logic, making it faster
+    and more reliable.
+    Example in real life:
+    When you transfer ₹5000 in a banking app:
+    Instead of testing via the UI (click → wait → confirm), an API test will directly call the
+    POST /transferMoney endpoint with input {from: "12345", to: "67890", amount: 5000} and check if
+    the response is "Success" and balances update correctly.
+-------------------------------------------------------------------------------------------------------------
+
+3.  Types of API Testing
+--> Here are the most common ones 👇
+    a) Functional Testing
+    Tests whether the API does what it is supposed to do.
+    Example: GET /users/101 should return details of user 101.
+
+    b) Validation Testing
+    Ensures the API returns correct data format, structure, and fields.
+    Example: Response should be in JSON format and contain id, name, email.
+    Response must include {"id":45, "name":"Laptop", "price":50000}.
+
+    c) Load / Performance Testing
+    Checks how API behaves under heavy traffic.
+    Example: 1000 users calling POST /login at the same time – does the API respond within 2 sec?
+
+    d) Security Testing
+    Ensures API is protected from unauthorized access.
+    Example: Calling GET /users/101 without a valid token should return 401 Unauthorized.
+
+    e) Error Handling Testing
+    Verifies API handles wrong input gracefully.
+    Example: If amount = -500, API should return 400 Bad Request instead of crashing.
+--------------------------------------------------------------------------------------------------------------
+
+4.  Common Advantages of API Testing
+--> Faster than UI testing – No need to open browsers or click buttons.
+    More reliable – Directly checks backend logic, less flaky.
+    Broader test coverage – Can test scenarios that are hard/impossible on UI (like DB values).
+    Language independent – APIs work over HTTP; you can test using Java, Python, Postman, etc.
+    Early bug detection – Since APIs are tested before UI, bugs are caught sooner.
+-------------------------------------------------------------------------------------------------------------
+
+5.  What are the main differences between API and Web Service?
+--> API (Application Programming Interface):
+    A broad concept → Any set of rules that allow two software systems to communicate.
+    (It could be web-based, OS-based, library-based, etc.)
+    Web Service:
+    A type of API that specifically uses the internet (HTTP, SOAP, REST, etc.) to enable
+    communication between two applications.
+    👉 So: Every Web Service is an API, but not every API is a Web Service.
+
+    API = Broad term, communication between software components (can be local or over the web).
+    Web Service = A special type of API that always uses the web (HTTP, SOAP, REST).
+    Simple rule: All Web Services are APIs, but not all APIs are Web Services.
+-------------------------------------------------------------------------------------------------------------
+
+6.  What are the differences between API Testing and UI Testing?
+--> API enables the communication between two separate software systems. A software system implementing
+    an API contains functions or subroutines that can be executed by another software system.
+    On the other hand, UI ( User Interface) testing refers to testing graphical interface such as how
+    users interact with the applications, testing application elements like fonts, images, layouts, etc.
+    UI testing basically focuses on the look and feel of an application.
+------------------------------------------------------------------------------------------------------------
+
+7.  What are the principles of an API test design?
+--> Guidelines you follow to make sure your API tests are effective, meaningful, and reliable.
+    Think of it like “rules for writing strong test cases” that cover both positive and negative scenarios.
+    1. Test for Correctness (Functional Coverage)
+    Verify that API does exactly what it claims in documentation.
+    Example: If API says GET/users/101 should return details of user 101, confirm it matches expected values.
+
+    2. Validate Inputs and Outputs
+    Always check both valid and invalid inputs.
+    Example
+    Valid → amount=5000 → Success.
+    Invalid → amount=-5000 → API should return 400 Bad Request.
+
+    3. Ensure Response Structure & Data Integrity
+    Verify response format (JSON/XML), data types, and mandatory fields.
+    Example: {"id":101, "name":"Nitin", "email":"abc@test.com"} → all fields must exist and be correct type.
+
+    4. Security & Authorization
+    Ensure only authorized users can access certain APIs.
+    Example:
+    With valid token → 200 OK.
+    Without token → 401 Unauthorized.
+
+    5. Performance & Scalability
+    Test API response time under load.
+    Example: API should respond within 2 sec even if 1000 users hit it.
+
+    6. Error Handling & Negative Scenarios
+    Test how API behaves in edge cases (nulls, missing fields, special characters).
+    Example: Sending "username": "" should return a clear error, not crash.
+
+    7. Idempotency (Consistency)
+    Repeated API calls with same input should give same result.
+    Example: DELETE/user/101 → First call deletes user, second call should not crash, but return
+    “User not found.”
+
+    8. Test Dependency & Isolation
+    Tests should not depend on other tests.
+    Example: Creating a user and verifying them should be an independent test, not relying on
+    “user already exists.”
+------------------------------------------------------------------------------------------------------------
